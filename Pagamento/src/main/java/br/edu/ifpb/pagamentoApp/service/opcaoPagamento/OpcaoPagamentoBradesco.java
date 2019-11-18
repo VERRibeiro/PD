@@ -16,11 +16,12 @@ public class OpcaoPagamentoBradesco {
         ConnectionFactory connectionFactory = new ConnectionFactory();
         connectionFactory.setHost("localhost");
         Connection conexao = connectionFactory.newConnection();        
-        Channel canal = conexao.createChannel();                 
-        canal.exchangeDeclare(EXCHANGE_NAME, "direct");
-        String NOME_FILA = canal.queueDeclare().getQueue();
-        
-        canal.queueBind(NOME_FILA, EXCHANGE_NAME, "BRADESCO");
+        Channel canal = conexao.createChannel();             
+        String NOME_FILA = "BRADESCO";
+//        canal.exchangeDeclare(EXCHANGE_NAME, "direct");
+//        String NOME_FILA = canal.queueDeclare().getQueue();                
+//        canal.queueBind(NOME_FILA, EXCHANGE_NAME, "BRADESCO");
+        canal.queueDeclare(NOME_FILA, true, false, false, null);
         System.out.println("BRADESCO");
         
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {

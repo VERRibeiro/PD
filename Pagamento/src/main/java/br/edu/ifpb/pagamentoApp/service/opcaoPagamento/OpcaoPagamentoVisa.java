@@ -16,11 +16,12 @@ public class OpcaoPagamentoVisa {
         connectionFactory.setHost("localhost");
         Connection conexao = connectionFactory.newConnection();        
         Channel canal = conexao.createChannel();                 
-        canal.exchangeDeclare(EXCHANGE_NAME, "direct");
-        String NOME_FILA = canal.queueDeclare().getQueue();
-        
-        canal.queueBind(NOME_FILA, EXCHANGE_NAME, "VISA");
-        System.out.println("VISA");
+        String NOME_FILA = "VISA";
+//      canal.exchangeDeclare(EXCHANGE_NAME, "direct");
+//      String NOME_FILA = canal.queueDeclare().getQueue();                
+//      canal.queueBind(NOME_FILA, EXCHANGE_NAME, "VISA");
+		canal.queueDeclare(NOME_FILA, true, false, false, null);
+		System.out.println("VISA");
         
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
         	String mensagem = new String (delivery.getBody(), "UTF-8");        	

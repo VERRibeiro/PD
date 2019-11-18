@@ -29,7 +29,7 @@ public class Cliente {
 			for (int j = 0; j < 10; j++) {
 				int i = (int) (Math.random() * 3);
 				canal.queueDeclare(NOME_FILA, true, false, false, null);
-				Thread.sleep(2000);
+//				Thread.sleep(2000);
 				Cartao c = new Cartao("005", "10", "9851-9590-5405-4563", bandeiras[i]);
 				String mensagem = g.toJson(c);
 				System.out.println("[x] Enviado '" + mensagem + "'");
