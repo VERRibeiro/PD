@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Getting Started: Serving Web Content</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Dale</h1>
+
+		Agencia:<br> <input type="text" name="agencia" id="agencia">
+		<br> Valor:<br> <input type="text" name="valor" id="valor">
+		<br> Numero Cartao:<br> <input type="text"
+			name="numeroCartao" id="numeroCartao"> <br> Bandeira:<br>
+		<select name="bandeira" id="bandeira">
+			<option value="VISA">visa</option>
+			<option value="MASTER">master</option>
+			<option value="BRADESCO">bradesco</option>
+		</select> 
+	
+	<br> <button id="botao" onclick="enviar()">Enviar</button>
+	<script type="text/javascript">
+	function enviar(){
+		var ajax = new XMLHttpRequest();		
+		// Seta tipo de requisição: Post e a URL da API
+		ajax.open("POST", "http://localhost:8080/sendMessage", true);
+		ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+		
+		// Seta paramêtros da requisição e envia a requisição
+		var data = "{\"agencia\": \"" + document.getElementById('agencia').value
+				+ "\",\"valor\": \"" + document.getElementById('valor').value
+				+ "\",\"numeroCartao\": \"" + document.getElementById('numeroCartao').value
+				+ "\",\"bandeira\": \"" + document.getElementById('bandeira').value
+				+ "\"}";
+		console.log(data);		
+
+		// Cria um evento para receber o retorno.
+		ajax.onreadystatechange = function() {
+
+			console.log("dele");
+		}
+		ajax.send(data);
+	}
+	</script>
+</body>
+</html>

@@ -7,6 +7,7 @@ public class Cartao {
 	private String valor;	
 	private String numeroCartao;
 	private String bandeira;
+	private String ip;
 	
 	public Cartao(String agencia, String valor, String numeroCartao, String bandeira) {
 		super();

@@ -11,13 +11,11 @@ import com.rabbitmq.client.MessageProperties;
 public class BancoSender {
 
 	public void sendMessage(String message, String bandeira) throws IOException, TimeoutException, InterruptedException {
-//		String EXCHANGE_NAME = "processarCartao";
 		ConnectionFactory factory = new ConnectionFactory();
 		factory.setHost("localhost");
 		try (Connection connection = factory.newConnection(); Channel canal = connection.createChannel()) {
-//			canal.exchangeDeclare(EXCHANGE_NAME, "direct");
-			canal.queueDeclare(bandeira, true, false, false, null);
-						
+
+			canal.queueDeclare(bandeira, true, false, false, null);			
 			canal.basicPublish("", bandeira, MessageProperties.PERSISTENT_TEXT_PLAIN, message.getBytes("UTF-8"));			
 			System.out.println("Enviando para o banco " + bandeira);
 		}
